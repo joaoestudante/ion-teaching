@@ -80,3 +80,15 @@ a:visited {
 a:link {
     text-decoration: none;
 }
+
+/* Dark Theme Shenanigans */
+
+@media (prefers-color-scheme: dark) {
+    .card { background:  #424242; color: white; }
+    .title__content, .title__icon { opacity: 0.87; color: white;}
+    .content { opacity: 0.6; color: white; }
+    a { color: #00FFFF; }
+    a:visited { color: #00FFFF; }
+    h1 { color: white}
+    body { background: #303030}
+  }
