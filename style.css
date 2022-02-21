@@ -84,11 +84,13 @@ a:link {
 /* Dark Theme Shenanigans */
 
 @media (prefers-color-scheme: dark) {
-    .card { background:  #424242; color: white; }
-    .title__content, .title__icon { opacity: 0.87; color: white;}
+    .card { background:  #2d3748; color: white; }
+    .title__content { opacity: 0.87; color: white;}
+    .title__icon {color: #319795}
     .content { opacity: 0.6; color: white; }
-    a { color: #00FFFF; }
-    a:visited { color: #00FFFF; }
+    a { color: #319795; }
+    a:visited { color: #319795; }
+    a:hover {color: #45d3d1}
     h1 { color: white}
-    body { background: #303030}
+    body { background: #1a202c}
   }
