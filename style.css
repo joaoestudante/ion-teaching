@@ -54,7 +54,7 @@ h1 {
 .content {
     font-size: 20pt;
     opacity: 0.7;
-    height: 30pt;
+    min-height: 30pt;
     margin-bottom: 30pt;
     padding: 10pt
 }
