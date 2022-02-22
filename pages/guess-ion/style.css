@@ -228,9 +228,9 @@ b {
     align-items: center;
     width: 75pt;
 }
-
-.title__end-icons {
-    width: 75pt;
+.title__theme-swapper {
+    padding-left: 30pt;
+    padding-right: 10pt; 
 }
 
 .label {
