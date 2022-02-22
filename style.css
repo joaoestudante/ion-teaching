@@ -2,9 +2,7 @@ h1 {
     font-family: 'Inter', sans-serif;
 }
 
-body.dark{
-    background-color: green;
-}
+
 
 .container {
     height: 80vh;
@@ -136,7 +134,8 @@ a:link {
 
 /* Dark Theme Shenanigans */
 
-@media (prefers-color-scheme: dark) {
+
+    
     .card { background:  #2d3748; color: white; }
     .card > .title > .title__content { opacity: 0.87; color: white;}
     .card > .title > .title__icon {color: #319795}
@@ -146,4 +145,5 @@ a:link {
     a:hover {color: #45d3d1}
     h1 { color: white}
     body { background: #1a202c}
-  }
+  } 
+
