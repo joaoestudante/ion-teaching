@@ -136,6 +136,10 @@ body {
   }
 
 
+.rule-card{
+    background-color: var(--card-background-color);
+}
+
 .rule-card > .title {
     display: flex;
     justify-content: space-between;
@@ -145,13 +149,13 @@ body {
 }
 
 .rule-card > .title > .title__content {
-    color: #2D3748;
+    color: var(--title-color);
     font-weight: 600;
     font-size: 20pt;
 }
 
 .rule-card > .title > .title__icon {
-    color: #2D3748;
+    color: var(--title-color);
     font-weight: 600;
     font-size: 20pt;
     cursor: pointer;
