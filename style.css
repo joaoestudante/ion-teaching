@@ -1,10 +1,12 @@
 body {
     background: var(--background-color);
+    transition: all 0.5s ease-in-out;
 }
 
 h1 {
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
+    transition: all 0.5s ease-in-out;
 }
 
 
@@ -86,6 +88,7 @@ h1 {
     border-radius: 12pt;
     border-width: 1pt solid var(--border-color);
     padding: 30pt;
+    transition: all 0.5s ease-in-out;
 }
 
 .card > .title {
@@ -100,12 +103,14 @@ h1 {
     color: var(--title-color);
     font-weight: 600;
     font-size: 30pt;
+    transition: all 0.5s ease-in-out;
 }
 
 .card > .title > .title__icon {
     color: var(--title-color);
     font-weight: 600;
     font-size: 20pt;
+    transition: all 0.5s ease-in-out;
 }
 
 .card > .content {
@@ -117,6 +122,7 @@ h1 {
     padding: 10pt;
     display: flex;
     align-items: center;
+    transition: all 0.5s ease-in-out;
 }
 
 .card > .action {
@@ -125,14 +131,17 @@ h1 {
     margin: 0pt 10pt 0pt 10pt;
     font-size: 20pt;
     opacity: 0.7;
+    transition: all 0.5s ease-in-out;
 }
 
 a {
     color: var(--link-color);
+    transition: all 0.5s ease-in-out;
 }
 
 a:visited {
     color: var(--link-color);
+    transition: all 0.5s ease-in-out;
 }
 a:hover {
     color:var(--link-hover-color);
