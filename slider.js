@@ -3,7 +3,11 @@ var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-
 
 if(storedTheme) {
     document.documentElement.setAttribute('color-theme', storedTheme)
- }
+}
+
+if (storedTheme == "dark") {
+    document.getElementById("checkbox").checked = true;
+}
 
 
 slider.onclick = function toggleTheme() {
