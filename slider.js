@@ -15,6 +15,6 @@ if(storedTheme) {
     }
 
     document.documentElement.setAttribute('color-theme', targetTheme);
-    localStorage.setItem('target', targetTheme);
+    localStorage.setItem('theme', targetTheme);
 };
 
