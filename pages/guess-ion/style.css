@@ -126,10 +126,43 @@ b {
     font-size: 13pt;
 }
 
-.title__homepage {
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15pt;
+}
+
+.title__title {
     font-size: 20pt;
+    font-weight: 600;
+}
+
+.title__start-icons {
+    font-size: 20pt;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 75pt;
+}
+
+.title__end-icons {
+    width: 75pt;
 }
 
 #instructions-icon {
     cursor: pointer;
+    color: #2D3748;
+}
+
+a {
+    color: #2D3748;
+}
+
+a:visited {
+    color: #2D3748;
+}
+
+a:link {
+    text-decoration: none;
 }
