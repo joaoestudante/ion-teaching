@@ -1,5 +1,5 @@
 var slider = document.getElementById("checkbox");
-var storedTheme = localStorage.getItem('theme')
+var storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
 if(storedTheme) {
     document.documentElement.setAttribute('color-theme', storedTheme)
