@@ -46,6 +46,22 @@
     border-radius: 5pt;
 }
 
+.ion-name {
+    cursor: pointer;
+}
+
+.blue {
+    background-color: #81d4fa;
+}
+
+.orange {
+    background-color: #ffcc80;
+}
+
+.purple {
+    background-color: #ce93d8;
+}
+
 .level-selector > .square:hover {
     background: #eff3f8;
     transform: scale(1.1);
