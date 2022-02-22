@@ -6,7 +6,7 @@ if(storedTheme) {
  }
 
 
- slider.onclick = function toggleTheme() {
+slider.onclick = function toggleTheme() {
     var currentTheme = document.documentElement.getAttribute("color-theme");
     var targetTheme = "light";
 
