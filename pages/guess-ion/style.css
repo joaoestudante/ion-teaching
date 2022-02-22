@@ -15,17 +15,18 @@
 }
 
 .rule-card {
-    width: 500pt;
+    max-width: 500pt;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-bottom: 20pt;
+    margin: 20pt;
     border-radius: 12pt;
     border-width: 1pt solid #E2E8F0;
     padding: 30pt;
     animation: SlideIn 200ms linear;
     position: absolute;
+    top: 20pt;
 }
 
 .close-rule-card {
