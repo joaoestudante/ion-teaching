@@ -3,9 +3,62 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* Rules about the difficulty selector */
+
 #game-container {
     display: none;
+    height: 100%;
 }
+
+#game-container > .content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game {
+    height: 100%;
+    width: 100%;
+    display: none; /* Changes to flex in JS */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.square-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 30pt;
+}
+
+.square {
+    height: 100pt;
+    width: 100pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15pt;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    border-width: 1pt solid var(--border-color);
+    background: var(--card-background-color);
+    border-radius: 5pt;
+}
+
+.level-selector > .square:hover {
+    background: #eff3f8;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.level-selector {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+/* Rules about the help/instructions screen */
 
 #start-game-container {
     display: flex;
@@ -165,4 +218,38 @@ a:visited {
 
 a:link {
     text-decoration: none;
+}
+
+:root {
+    --background-color: white;
+    --card-background-color: white;
+    --title-color: #2D3748;
+    --text-color: black;
+    --link-color: #1976d2;
+    --link-hover-color: #1976d2;
+    --border-color: #E2E8F0;
+    --transition-time: 0.3s;
+
+}
+
+html[color-theme = 'light']{
+    --background-color: white;
+    --card-background-color: white;
+    --title-color: #2D3748;
+    --text-color: black;
+    --link-color: #1976d2;
+    --link-hover-color: #1976d2;
+    --border-color: #E2E8F0;
+    --transition-time: 0.3s;
+}
+
+html[color-theme = 'dark']{
+    --background-color: #1a202c;
+    --card-background-color: #2D3748;
+    --title-color: white;
+    --text-color: white;
+    --link-color: #319795;
+    --link-hover-color: #45d3d1;
+    --border-color: #E2E8F0;
+    --transition-time: 0.3s;
 }
