@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+    <title>Adivinhar os iões</title>
+    <script src="code.js"></script>
+</head>
+<body onload="">
+    <div class="container">
+        <div id="game-container">
+            <div class="title">
+                <div class="title__homepage">
+                    <i class="fa-solid fa-house"></i>
+                    <i id="instructions-icon" class="fa-solid fa-circle-question" onclick="openInstructions()"></i>
+                </div>
+            </div>
+            <div class="content">
+                <div id="ion" class="square"></div>
+                <div class="answers">
+                    <div id="ion-name1" class="square"></div>
+                    <div id="ion-name2" class="square"></div>
+                    <div id="ion-name3" class="square"></div>
+                </div>
+            </div>
+        </div>
+        <div id="start-game-container">
+            <div id="start" class="rule-card">
+                <div class="title">
+                    <div class="title__content">Instruções</div>
+                    <div class="title__icon" onclick="closeInstructions()"><i class="fa-solid fa-xmark"></i></div>
+                </div>
+                <div class="content">
+                    O objectivo do jogo é associar iões aos seus nomes. 
+                    
+                    <div class="mini-game">
+                        <div class="mini-ion-line">
+                            <div class="mini-ion">Na+</div>
+                        </div>
+                        <div class="mini-answers-line">
+                            <div class="mini-ion">Sódio</div>
+                            <div class="mini-ion">Ferro</div>
+                            <div class="mini-ion">Cálcio</div>
+                        </div>
+                    </div>
+                    
+                    Isto é feito em 3 níveis:
+
+                    <b>Nível 1</b>
+
+                    Contém maioritariamente iões monoatómicos, como o Sódio, Cálcio, Ferro...
+
+                    <b>Nível 2</b>
+
+                    Contém maioritariamente iões poliatómicos, como o Permanganato, Amónio... e iões menos conhecidos, como o Bismuto, Cádmio...
+                
+                    <b>Nível 3</b>
+
+                    Contém todos os tipos de iões, e é necessário associar correctamente 3 iões ao mesmo tempo.
+
+                </div>
+                <!-- <div class="action">
+                    <a href="/pages/learn-formula.html">Jogar <i class="fa-solid fa-arrow-right-long"></i></a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

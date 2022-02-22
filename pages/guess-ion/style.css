@@ -1,0 +1,134 @@
+.container {
+    height: 90vh;
+    font-family: 'Inter', sans-serif;
+}
+
+#game-container {
+    display: none;
+}
+
+#start-game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.rule-card {
+    width: 500pt;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 20pt;
+    border-radius: 12pt;
+    border-width: 1pt solid #E2E8F0;
+    padding: 30pt;
+    animation: SlideIn 200ms linear;
+    position: absolute;
+}
+
+.close-rule-card {
+    animation: SlideOut 200ms;
+}
+
+@keyframes SlideIn {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes SlideOut {
+    0% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+  }
+
+
+.rule-card > .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15pt;
+    padding: 10pt 0pt 0pt 10pt;
+}
+
+.rule-card > .title > .title__content {
+    color: #2D3748;
+    font-weight: 600;
+    font-size: 20pt;
+}
+
+.rule-card > .title > .title__icon {
+    color: #2D3748;
+    font-weight: 600;
+    font-size: 20pt;
+    cursor: pointer;
+    user-select: none;
+}
+
+.rule-card > .content {
+    font-size: 15pt;
+    opacity: 0.7;
+    min-height: 60pt;
+    padding: 10pt;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+b {
+    margin-top: 20pt;
+    margin-bottom: 5pt;
+}
+
+.mini-game {
+    margin-top: 20pt;
+    height: 150pt;
+    width: 100%;
+}
+
+.mini-ion-line {
+    height: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.mini-answers-line {
+    height: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20pt;
+}
+
+.mini-ion {
+    width: 50pt;
+    height: 50pt;
+    border-radius: 5pt;
+    border: 1pt solid #bfc4ca;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13pt;
+}
+
+.title__homepage {
+    font-size: 20pt;
+}
+
+#instructions-icon {
+    cursor: pointer;
+}
