@@ -1,5 +1,6 @@
 h1 {
     font-family: 'Inter', sans-serif;
+    color: 
 }
 
 
@@ -73,12 +74,13 @@ h1 {
 .card {
     width: 500pt;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    background: var(--card-background-color);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     margin-bottom: 20pt;
     border-radius: 12pt;
-    border-width: 1pt solid #E2E8F0;
+    border-width: 1pt solid var(--border-color);
     padding: 30pt;
 }
 
@@ -91,13 +93,13 @@ h1 {
 }
 
 .card > .title > .title__content {
-    color: #2D3748;
+    color: var(--title-color);
     font-weight: 600;
     font-size: 30pt;
 }
 
 .card > .title > .title__icon {
-    color: #2D3748;
+    color: var(--title-color);
     font-weight: 600;
     font-size: 20pt;
 }
@@ -113,7 +115,7 @@ h1 {
 }
 
 .card > .action {
-    border-top: 2pt solid #E2E8F0;
+    border-top: 2pt solid var(--border-color);
     padding: 20pt 0pt 0pt 0pt;
     margin: 0pt 10pt 0pt 10pt;
     font-size: 20pt;
@@ -121,11 +123,14 @@ h1 {
 }
 
 a {
-    color: #1976d2;
+    color: var(--link-colour);
 }
 
 a:visited {
-    color: #1976d2;
+    color: var(--link-colour);
+}
+a:hover {
+    color:
 }
 
 a:link {
@@ -147,3 +152,33 @@ a:link {
     body { background: #1a202c}
   } 
 
+:root {
+    --background-color: white;
+    --card-background-color: white;
+    --title-color: #2D3748;
+    --text-color: black;
+    --link-color: #1976d2;
+    --link-hover-color: #1976d2;
+    --border-color: #E2E8F0;
+
+}
+
+html[color-theme = 'light']{
+    --background-color: white;
+    --card-background-color: white;
+    --title-color: #2D3748;
+    --text-color: black;
+    --link-color: #1976d2;
+    --link-hover-color: #1976d2;
+    --border-color: #E2E8F0;
+}
+
+html[color-theme = 'dark']{
+    --background-color: #1a202c;
+    --card-background-color: #2D3748;
+    --title-color: white;
+    --text-color: white;
+    --link-color: #319795;
+    --link-hover-color: #45d3d1;
+    --border-color: #E2E8F0;
+}
