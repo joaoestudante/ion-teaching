@@ -128,8 +128,22 @@ b {
 
 .title__homepage {
     font-size: 20pt;
+    
 }
 
 #instructions-icon {
     cursor: pointer;
+    color: #2D3748;
+}
+
+a {
+    color: #2D3748;
+}
+
+a:visited {
+    color: #2D3748;
+}
+
+a:link {
+    text-decoration: none;
 }
