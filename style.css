@@ -1,6 +1,6 @@
 h1 {
     font-family: 'Inter', sans-serif;
-    color: 
+    color: var(--text-color);
 }
 
 
@@ -130,7 +130,7 @@ a:visited {
     color: var(--link-colour);
 }
 a:hover {
-    color:
+    color:var(--link-hover-color);
 }
 
 a:link {
