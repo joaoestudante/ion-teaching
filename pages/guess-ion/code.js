@@ -34,6 +34,17 @@ function setSquareToWhite(e) {
     e.target.style.background = "white";
 }
 
+function handleClick(e, ion_to_guess_name) {
+    if (e.target.innerHTML == ion_to_guess_name) {
+        e.target.style.background = "#81d4fa";
+        e.target.removeEventListener('mouseleave', setSquareToWhite);
+        progress = progress + 1;
+        document.getElementById("next-button").style.visibility = "visible";
+    } else {
+
+    }
+}
+
 async function startLevel(level) {
     console.log("Level " + level + " started.");
 
@@ -67,18 +78,15 @@ function runLevel1(selected_ions) {
 
     for (ion_name of ion_names) {
         ion_name.style.background = "white";
-        ion_name.addEventListener('mouseenter', setSquareToBlue)
-        ion_name.addEventListener('mouseleave', setSquareToWhite);
-        ion_name.addEventListener('click', e => {
-            if (e.target.innerHTML == ion_to_guess["name"]) {
-                e.target.style.background = "#81d4fa";
-                e.target.removeEventListener('mouseleave', setSquareToWhite);
-                progress = progress + 1;
-                document.getElementById("next-button").style.visibility = "visible";
-            } else {
 
-            }
-        })
+        // We need to remove the previous event handlers, otherwise an ion that was
+        // correct before will be recognized as correct in all further attempts.
+        // The simplest way to do this is to remove and re-add the elements to the tree.
+        elClone = ion_name.cloneNode(true);
+        ion_name.parentNode.replaceChild(elClone, ion_name);
+        elClone.addEventListener('mouseenter', setSquareToBlue)
+        elClone.addEventListener('mouseleave', setSquareToWhite);
+        elClone.addEventListener('click', e => handleClick(e, ion_to_guess["name"]));
     }
     document.getElementById("ion1").classList.add("blue")
 }
