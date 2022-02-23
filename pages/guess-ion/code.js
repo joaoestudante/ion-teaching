@@ -52,6 +52,12 @@ function handleClick(e, ion_to_guess_name) {
         button.innerHTML = "Terminar!";
         button.removeEventListener("click", runLevel1);
         button.addEventListener("click", finishLevel.bind(null, e, 1));
+        var ion_names = document.getElementsByClassName("ion-name");
+        for (ion_name of ion_names) {
+            // Disable all events
+            elClone = ion_name.cloneNode(true);
+            ion_name.parentNode.replaceChild(elClone, ion_name);
+        }
     }
     console.log(progress);
 
