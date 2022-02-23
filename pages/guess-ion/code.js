@@ -38,11 +38,27 @@ function handleClick(e, ion_to_guess_name) {
     if (e.target.innerHTML == ion_to_guess_name) {
         e.target.style.background = "#81d4fa";
         e.target.removeEventListener('mouseleave', setSquareToWhite);
-        progress = progress + 1;
-        document.getElementById("next-button").style.visibility = "visible";
+        document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "yellow";
     } else {
-
+        document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "red";
+        e.target.style.background = "red";
+        e.target.removeEventListener('mouseleave', setSquareToWhite);
     }
+    var button = document.getElementById("next-button");
+    button.style.visibility = "visible";
+    progress = progress + 1;
+    if (progress == max_guess) {
+        // Game should finish
+        button.innerHTML = "Terminar!";
+        button.removeEventListener("click", runLevel1);
+        button.addEventListener("click", finishLevel.bind(null, e, 1));
+    }
+    console.log(progress);
+
+}
+
+function finishLevel(e, level) {
+    alert("Game finished! Show results page...");
 }
 
 async function startLevel(level) {
@@ -50,19 +66,18 @@ async function startLevel(level) {
 
 
     // Select 3 random ions according to the chosen level
-
-    selected_ions = await getRandomIons(3, level);
-    console.log(selected_ions);
-
-    if (level == 1)
-        runLevel1(selected_ions);
+    if (level == 1) {
+        await runLevel1();
+        document.getElementById("next-button").addEventListener("click", runLevel1);
+    }
 
     document.getElementById("level-selector").style.display = "none";
     document.getElementById("game").style.display = "flex";
 }
 
 
-function runLevel1(selected_ions) {
+async function runLevel1() {
+    selected_ions = await getRandomIons(3, 1);
     document.getElementById("ion2").style.display = "none";
     document.getElementById("ion3").style.display = "none";
     document.getElementById("next-button").style.visibility = "hidden";

@@ -37,6 +37,11 @@ body {
     margin-top: 30pt;
 }
 
+.stars {
+    color: var(--text-color);
+    font-size: 20pt;
+}
+
 .square {
     height: 100pt;
     width: 100pt;
