@@ -1,3 +1,6 @@
+var progress = 0;
+var max_guess = 5;
+
 function loadGame() {
     const ion = 2;
 }
@@ -23,6 +26,14 @@ function openInstructions() {
     game.style.display = "none";
 }
 
+function setSquareToBlue(e) {
+    e.target.style.background = "#81d4fa";
+}
+
+function setSquareToWhite(e) {
+    e.target.style.background = "white";
+}
+
 async function startLevel(level) {
     console.log("Level " + level + " started.");
 
@@ -32,39 +43,44 @@ async function startLevel(level) {
     selected_ions = await getRandomIons(3, level);
     console.log(selected_ions);
 
-    if (level == 1) {
-        // Only one square should exist
-        document.getElementById("ion2").style.display = "none";
-        document.getElementById("ion3").style.display = "none";
-
-        var ion_to_guess = selected_ions[parseInt(Math.random() * selected_ions.length)];
-        document.getElementById("ion1").innerHTML = ion_to_guess["symbol"];
-        shuffleArray(selected_ions);
-        var ion_names = document.getElementsByClassName("ion-name");
-        for (i in selected_ions) {
-            ion_names[i].innerHTML = selected_ions[i]["name"]
-        }
-
-        for (ion_name of ion_names) {
-            ion_name.addEventListener('mouseenter', e => {
-                e.target.style.background = "#81d4fa";
-            })
-            ion_name.addEventListener('mouseleave', e => {
-                e.target.style.background = "white";
-            })
-            ion_name.addEventListener('click', e => {
-                if (e.target.innerHTML == ion_to_guess["name"]) {
-                    console.log("Correct!!!!");
-                    e.target.style.background = "#81d4fa";
-                    e.target.removeEventListener('mouseleave', () => {});
-                }
-            })
-        }
-        document.getElementById("ion1").classList.add("blue")
-    }
+    if (level == 1)
+        runLevel1(selected_ions);
 
     document.getElementById("level-selector").style.display = "none";
     document.getElementById("game").style.display = "flex";
+}
+
+
+function runLevel1(selected_ions) {
+    document.getElementById("ion2").style.display = "none";
+    document.getElementById("ion3").style.display = "none";
+    document.getElementById("next-button").style.visibility = "hidden";
+
+    var ion_to_guess = selected_ions[parseInt(Math.random() * selected_ions.length)];
+    document.getElementById("ion1").innerHTML = ion_to_guess["symbol"];
+    shuffleArray(selected_ions);
+
+    var ion_names = document.getElementsByClassName("ion-name");
+    for (i in selected_ions) {
+        ion_names[i].innerHTML = selected_ions[i]["name"]
+    }
+
+    for (ion_name of ion_names) {
+        ion_name.style.background = "white";
+        ion_name.addEventListener('mouseenter', setSquareToBlue)
+        ion_name.addEventListener('mouseleave', setSquareToWhite);
+        ion_name.addEventListener('click', e => {
+            if (e.target.innerHTML == ion_to_guess["name"]) {
+                e.target.style.background = "#81d4fa";
+                e.target.removeEventListener('mouseleave', setSquareToWhite);
+                progress = progress + 1;
+                document.getElementById("next-button").style.visibility = "visible";
+            } else {
+
+            }
+        })
+    }
+    document.getElementById("ion1").classList.add("blue")
 }
 
 async function getRandomIons(n, level) {
