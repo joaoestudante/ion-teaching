@@ -71,7 +71,7 @@ body {
     background-color: var(--square-hover-color);
 }
 
-.ion-name {
+.ion-bottom-row {
     cursor: pointer;
 }
 
