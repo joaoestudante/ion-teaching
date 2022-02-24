@@ -27,16 +27,18 @@ function openInstructions() {
 }
 
 function setSquareToBlue(e) {
-    e.target.style.background = "#81d4fa";
+    var style = getComputedStyle(document.body)
+    e.target.style.background = style.getPropertyValue("--link-color");
 }
 
 function setSquareToWhite(e) {
-    e.target.style.background = "white";
+    var style = getComputedStyle(document.body)
+    e.target.style.background = style.getPropertyValue("--card-background");
 }
 
 function handleClick(e, ion_to_guess_name, run_level_callback, level) {
     if (e.target.innerHTML == ion_to_guess_name) {
-        e.target.style.background = "#81d4fa";
+        setSquareToBlue(e);
         e.target.removeEventListener('mouseleave', setSquareToWhite);
         document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "yellow";
     } else {
@@ -107,8 +109,9 @@ async function runLevel2() {
     document.getElementById("ion1").classList.add("blue")
 }
 
-
 async function runLevel1() {
+    var style = getComputedStyle(document.body);
+
     selected_ions = await getRandomIons(3, 1);
     document.getElementById("ion2").style.display = "none";
     document.getElementById("ion3").style.display = "none";
@@ -124,7 +127,7 @@ async function runLevel1() {
     }
 
     for (ion_name of ion_names) {
-        ion_name.style.background = "white";
+        ion_name.style.background = style.getPropertyValue("--card-background-color");
 
         // We need to remove the previous event handlers, otherwise an ion that was
         // correct before will be recognized as correct in all further attempts.
@@ -135,7 +138,7 @@ async function runLevel1() {
         elClone.addEventListener('mouseleave', setSquareToWhite);
         elClone.addEventListener('click', e => handleClick(e, ion_to_guess["name"], runLevel1, 1));
     }
-    document.getElementById("ion1").classList.add("blue")
+    document.getElementById("ion1").classList.add("blue");
 }
 
 async function getRandomIons(n, level) {
