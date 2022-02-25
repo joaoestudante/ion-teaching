@@ -39,8 +39,18 @@ body {
 }
 
 .stars {
-    color: var(--text-color);
+    color: var(--star-default-color);
     font-size: 20pt;
+}
+
+.star-correct {
+    color: var(--star-correct-color);
+    animation: scaling linear 0.3s 2 alternate;
+}
+
+.star-wrong {
+    color: var(--star-wrong-color);
+    animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 .square {
@@ -56,7 +66,58 @@ body {
     transition: all var(--transition-time) ease;
     border-radius: 5pt;
     margin-top: 20pt;
+    color: var(--text-color);
 }
+
+
+.firstIonSelected {
+    background: var(--ion1-color) !important;
+}
+
+.orange {
+    background: var(--ion2-color) !important;
+}
+
+.purple {
+    background: var(--ion3-color) !important;
+}
+
+.wrong-guess {
+    background: var(--wrong-ion-color) !important;
+    animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.correct-guess {
+    animation: scaling linear 0.12s 2 alternate;
+}
+
+@keyframes scaling {
+From {
+    transform: scale(1.0);
+}
+To {
+    transform: scale(1.2);
+}
+}
+
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
 
 #next-button {
     width: 90%;
@@ -77,17 +138,6 @@ body {
     cursor: pointer;
 }
 
-.blue {
-    background-color: var(--link-color);
-}
-
-.orange {
-    background-color: #ffcc80;
-}
-
-.purple {
-    background-color: #ce93d8;
-}
 
 .level-selector > .square:hover {
     background: var(--square-hover-color);
@@ -325,7 +375,13 @@ a:link {
     --border-color: #E2E8F0;
     --transition-time: 0.3s;
     --button-color: #a5d6a7;
-
+    --ion1-color: #80d6ff;
+    --ion2-color: #ffb74d;
+    --ion3-color: #ba68c8;
+    --wrong-ion-color: #f44336;
+    --star-correct-color: var(--text-color);
+    --star-wrong-color: var(--wrong-ion-color);
+    --star-default-color: #efefef;
 }
 
 html[color-theme = 'light']{
@@ -338,6 +394,13 @@ html[color-theme = 'light']{
     --link-hover-color: #1976d2;
     --border-color: #E2E8F0;
     --transition-time: 0.3s;
+    --ion1-color: #80d6ff;
+    --ion2-color: #ffb74d;
+    --ion3-color: #ba68c8;
+    --wrong-ion-color: #f44336;
+    --star-correct-color: var(--text-color);
+    --star-wrong-color: var(--wrong-ion-color);
+    --star-default-color: #efefef;
 }
 
 html[color-theme = 'dark']{
@@ -350,6 +413,13 @@ html[color-theme = 'dark']{
     --link-hover-color: #45d3d1;
     --border-color: #E2E8F0;
     --transition-time: 0.3s;
+    --ion1-color: #0077c2;
+    --ion2-color: #ffb74d;
+    --ion3-color: #ba68c8;
+    --wrong-ion-color: #f44336;
+    --star-correct-color: var(--text-color);
+    --star-wrong-color: var(--wrong-ion-color);
+    --star-default-color: #494949;
 }
 
 /* Responsive layout */

@@ -24,24 +24,23 @@ function openInstructions() {
 }
 
 function setSquareToSelected(e) {
-    var style = getComputedStyle(document.body)
-    e.target.style.background = style.getPropertyValue("--link-color");
+    e.target.classList.add("firstIonSelected");
 }
 
 function setSquareToUnselected(e) {
-    var style = getComputedStyle(document.body)
-    e.target.style.background = style.getPropertyValue("--card-background");
+    e.target.classList.remove("firstIonSelected");
 }
 
 function handleClick(e, ion_to_guess_name, run_level_callback, level) {
     if (e.target.innerHTML == ion_to_guess_name) {
         setSquareToSelected(e);
         e.target.removeEventListener('mouseleave', setSquareToUnselected);
-        document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "yellow";
+        document.getElementsByClassName("fa-solid fa-star")[progress].classList.add("star-correct");
+        e.target.classList.add("correct-guess");
     } else {
-        document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "red";
-        e.target.style.background = "red";
         e.target.removeEventListener('mouseleave', setSquareToUnselected);
+        document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "red";
+        e.target.classList.add("wrong-guess");
     }
     var button = document.getElementById("next-button");
     button.style.visibility = "visible";
@@ -83,41 +82,27 @@ async function startLevel(level) {
 }
 
 async function runLevel2() {
+    clearColors();
+    hideExtraElements();
     selected_ions = await getRandomIons(3, 2);
-    document.getElementById("ion-top2").style.display = "none";
-    document.getElementById("ion-top3").style.display = "none";
-    document.getElementById("next-button").style.visibility = "hidden";
-
     var ion_to_guess = selected_ions[parseInt(Math.random() * selected_ions.length)];
     document.getElementById("ion-top1").innerHTML = ion_to_guess["name"];
     shuffleArray(selected_ions);
 
-    /* Name is misleading - we are adding ion symbols in this level, not names */
-    var ion_names = document.getElementsByClassName("ion-bottom-row");
+    var ion_symbols = document.getElementsByClassName("ion-bottom-row");
     for (i in selected_ions) {
-        ion_names[i].innerHTML = selected_ions[i]["symbol"]
+        ion_symbols[i].innerHTML = selected_ions[i]["symbol"]
     }
 
-    for (ion_name of ion_names) {
-        ion_name.style.background = "white";
-
-        elClone = ion_name.cloneNode(true);
-        ion_name.parentNode.replaceChild(elClone, ion_name);
-        elClone.addEventListener('mouseenter', setSquareToSelected)
-        elClone.addEventListener('mouseleave', setSquareToUnselected);
-        elClone.addEventListener('click', e => handleClick(e, ion_to_guess["symbol"], runLevel2, 2));
-    }
-    document.getElementById("ion-top1").classList.add("blue")
+    setupEvents(ion_symbols, ion_to_guess["symbol"], runLevel2, 2);
+    document.getElementById("ion-top1").classList.add("firstIonSelected")
 }
 
 async function runLevel1() {
-    var style = getComputedStyle(document.body);
+    clearColors();
+    hideExtraElements();
 
     selected_ions = await getRandomIons(3, 1);
-    document.getElementById("ion-top2").style.display = "none";
-    document.getElementById("ion-top3").style.display = "none";
-    document.getElementById("next-button").style.visibility = "hidden";
-
     var ion_to_guess = selected_ions[parseInt(Math.random() * selected_ions.length)];
     document.getElementById("ion-top1").innerHTML = ion_to_guess["symbol"];
     shuffleArray(selected_ions);
@@ -127,19 +112,36 @@ async function runLevel1() {
         ion_names[i].innerHTML = selected_ions[i]["name"]
     }
 
-    for (ion_name of ion_names) {
-        ion_name.style.background = style.getPropertyValue("--card-background-color");
+    setupEvents(ion_names, ion_to_guess["name"], runLevel1, 1)
+    document.getElementById("ion-top1").classList.add("firstIonSelected");
+}
 
+function clearColors() {
+    // Clears the selected colors from the previous guess.
+    for (i of ["1","2","3"]) {
+        document.getElementById("ion-bottom-row"+i).classList.remove("firstIonSelected");
+        document.getElementById("ion-bottom-row"+i).classList.remove("correct-guess");
+        document.getElementById("ion-bottom-row"+i).classList.remove("wrong-guess");
+    }
+}
+
+function hideExtraElements() {
+    document.getElementById("ion-top2").style.display = "none";
+    document.getElementById("ion-top3").style.display = "none";
+    document.getElementById("next-button").style.visibility = "hidden";
+}
+
+function setupEvents(elements, correct_value, callback, level) {
+    for (el of elements) {
         // We need to remove the previous event handlers, otherwise an ion that was
         // correct before will be recognized as correct in all further attempts.
         // The simplest way to do this is to remove and re-add the elements to the tree.
-        elClone = ion_name.cloneNode(true);
-        ion_name.parentNode.replaceChild(elClone, ion_name);
+        elClone = el.cloneNode(true);
+        el.parentNode.replaceChild(elClone, el);
         elClone.addEventListener('mouseenter', setSquareToSelected)
         elClone.addEventListener('mouseleave', setSquareToUnselected);
-        elClone.addEventListener('click', e => handleClick(e, ion_to_guess["name"], runLevel1, 1));
+        elClone.addEventListener('click', e => handleClick(e, correct_value, callback, level));
     }
-    document.getElementById("ion-top1").classList.add("blue");
 }
 
 async function getRandomIons(n, level) {
