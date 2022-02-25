@@ -26,15 +26,16 @@ body {
     width: 100%;
     display: none; /* Changes to flex in JS */
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
 
 .square-row {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
-    margin-top: 30pt;
+    margin-top: 20pt;
 }
 
 .stars {
@@ -54,6 +55,7 @@ body {
     background: var(--card-background-color);
     transition: all var(--transition-time) ease;
     border-radius: 5pt;
+    margin-top: 20pt;
 }
 
 #next-button {
@@ -95,6 +97,7 @@ body {
 
 .level-selector {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     width: 100%;
     color: var(--text-color);
@@ -107,7 +110,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100%;
 }
 
 .rule-card {
@@ -116,13 +119,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin: 20pt;
+    margin: 20pt 20pt 0pt 20pt;
     border-radius: 12pt;
     border-width: 1pt solid #E2E8F0;
     padding: 30pt;
     animation: SlideIn 200ms linear;
     position: absolute;
-    top: 20pt;
     color: var(--text-color);
 }
 
@@ -349,3 +351,45 @@ html[color-theme = 'dark']{
     --border-color: #E2E8F0;
     --transition-time: 0.3s;
 }
+
+/* Responsive layout */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .rule-card {
+        box-shadow: 1pt var(--background-color);
+        border-width: 1pt solid var(--background-color);
+        max-width: 300pt;
+        padding: 0pt;
+        top: 10pt;
+    }
+
+    .rule-card > .title {
+        margin-bottom: 10pt;
+    }
+    
+    .rule-card > .title > .title__content {
+        font-weight: 600;
+        font-size: 15pt;
+    }
+    
+    .rule-card > .title > .title__icon {
+        font-weight: 600;
+        font-size: 12pt;
+    }
+    
+    .rule-card > .content {
+        font-size: 14pt;
+        min-height: 60pt;
+        padding: 10pt;
+    }
+
+    .title__title {
+        font-size: 15pt;
+    }
+
+    .square {
+        font-size: 13pt;
+    }
+
+ }

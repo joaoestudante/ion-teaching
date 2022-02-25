@@ -1,9 +1,6 @@
 var progress = 0;
 var max_guess = 5;
 
-function loadGame() {
-    const ion = 2;
-}
 
 function closeInstructions() {
     var instructions = document.getElementById("start");
@@ -20,7 +17,7 @@ function closeInstructions() {
 }
 
 function openInstructions() {
-    var instructions = document.getElementById("start");
+    var instructions = document.getElementById("start-game-container");
     instructions.style.display = "block";
     var game = document.getElementById("game-container");
     game.style.display = "none";
@@ -81,6 +78,7 @@ async function startLevel(level) {
     }
 
     document.getElementById("level-selector").style.display = "none";
+    document.getElementById("title").style.display = "none";
     document.getElementById("game").style.display = "flex";
 }
 
