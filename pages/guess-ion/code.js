@@ -1,10 +1,20 @@
 var progress = 0;
 var max_guess = 5;
+var correct_sound = new Howl({
+    src:["../../sfx/correct.wav"]
+});
+var wrong_sound = new Howl({
+    src:["../../sfx/wrong.wav"]
+});
+var click_sound = new Howl({
+    src:["../../sfx/click.wav"]
+});
 
 
 function closeInstructions() {
     var instructions = document.getElementById("start");
     instructions.classList.add("close-rule-card");
+    click_sound.play();
     setTimeout(() => {
         instructions.classList.remove("close-rule-card");
         var instructions_container = document.getElementById("start-game-container");
@@ -37,10 +47,12 @@ function handleClick(e, ion_to_guess_name, run_level_callback, level) {
         e.target.removeEventListener('mouseleave', setSquareToUnselected);
         document.getElementsByClassName("fa-solid fa-star")[progress].classList.add("star-correct");
         e.target.classList.add("correct-guess");
+        correct_sound.play();
     } else {
         e.target.removeEventListener('mouseleave', setSquareToUnselected);
         document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "red";
         e.target.classList.add("wrong-guess");
+        wrong_sound.play();
     }
     var button = document.getElementById("next-button");
     button.style.visibility = "visible";
@@ -99,6 +111,7 @@ async function runLevel2() {
 }
 
 async function runLevel1() {
+    click_sound.play();
     clearColors();
     hideExtraElements();
 
