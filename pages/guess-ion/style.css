@@ -398,7 +398,7 @@ html[color-theme = 'light']{
     --ion2-color: #ffb74d;
     --ion3-color: #ba68c8;
     --wrong-ion-color: #f44336;
-    --star-correct-color: var(--text-color);
+    --star-correct-color: #ffeb3b;
     --star-wrong-color: var(--wrong-ion-color);
     --star-default-color: #efefef;
 }
@@ -417,7 +417,7 @@ html[color-theme = 'dark']{
     --ion2-color: #ffb74d;
     --ion3-color: #ba68c8;
     --wrong-ion-color: #f44336;
-    --star-correct-color: var(--text-color);
+    --star-correct-color: #ffeb3b;
     --star-wrong-color: var(--wrong-ion-color);
     --star-default-color: #494949;
 }
