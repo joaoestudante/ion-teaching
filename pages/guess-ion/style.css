@@ -69,16 +69,20 @@ body {
     color: var(--text-color);
 }
 
+.disabled-square {
+    background: var(--square-disabled-color);
+    opacity: 0.5 !important;
+}
 
 .firstIonSelected {
     background: var(--ion1-color) !important;
 }
 
-.orange {
+.secondIonSelected {
     background: var(--ion2-color) !important;
 }
 
-.purple {
+.thirdIonSelected {
     background: var(--ion3-color) !important;
 }
 
@@ -86,6 +90,13 @@ body {
     background: var(--wrong-ion-color) !important;
     animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
 }
+
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+  }
 
 .correct-guess {
     animation: scaling linear 0.12s 2 alternate;
@@ -401,6 +412,7 @@ html[color-theme = 'light']{
     --star-correct-color: #ffeb3b;
     --star-wrong-color: var(--wrong-ion-color);
     --star-default-color: #efefef;
+    --square-disabled-color: #E2E8F0;
 }
 
 html[color-theme = 'dark']{

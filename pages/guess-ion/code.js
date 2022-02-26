@@ -85,7 +85,7 @@ async function startLevel(level) {
         document.getElementById("next-button").addEventListener("click", runLevel2);
     } else if (level == 3) {
         await runLevel3();
-        document.getElementById("next-button").addEventListener("click", runLevel2);
+        document.getElementById("next-button").addEventListener("click", runLevel3);
     }
 
     document.getElementById("level-selector").style.display = "none";
