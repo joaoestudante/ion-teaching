@@ -1,20 +1,34 @@
 var progress = 0;
-var max_guess = 5;
+var max_guess = 1;
 var correct_sound = new Howl({
-    src:["../../sfx/correct.wav"]
+    src:["../../sfx/correct.wav"],
+    volume: 0
 });
 var wrong_sound = new Howl({
-    src:["../../sfx/wrong.wav"]
+    src:["../../sfx/wrong.wav"],
+    volume: 0
 });
 var click_sound = new Howl({
-    src:["../../sfx/click.wav"]
+    src:["../../sfx/click.wav"],
+    volume: 0
 });
 
+var answers = []
+// function playSound(type) {
+//     muted = mute_button.checked
+//     switch(type) {
+//         case "click":
+//             if mute_button.checked
+//             click_sound.play()
+//         case "corrre"
+//     }
+// }
 
 function closeInstructions() {
     var instructions = document.getElementById("start");
     instructions.classList.add("close-rule-card");
     click_sound.play();
+    //playSound("click");
     setTimeout(() => {
         instructions.classList.remove("close-rule-card");
         var instructions_container = document.getElementById("start-game-container");
@@ -31,6 +45,8 @@ function openInstructions() {
     instructions.style.display = "block";
     var game = document.getElementById("game-container");
     game.style.display = "none";
+    var results = document.getElementById("results-container");
+    results.style.display = "none";
 }
 
 function setSquareToSelected(e) {
@@ -50,9 +66,12 @@ function handleClick(e, ion_to_guess_name, run_level_callback, level) {
         setTimeout(() => correct_sound.play(), 150);
     } else {
         e.target.removeEventListener('mouseleave', setSquareToUnselected);
-        document.getElementsByClassName("fa-solid fa-star")[progress].style.color = "red";
+        document.getElementsByClassName("fa-solid fa-star")[progress].classList.add("star-wrong");
         e.target.classList.add("wrong-guess");
         setTimeout(() => wrong_sound.play(), 150);
+        answers.push(
+            {"correct":ion_to_guess_name, "chosen":e.target.innerHTML}
+        )
     }
     var button = document.getElementById("next-button");
     button.style.visibility = "visible";
@@ -61,7 +80,7 @@ function handleClick(e, ion_to_guess_name, run_level_callback, level) {
         // Game should finish
         button.innerHTML = "Terminar!";
         button.removeEventListener("click", run_level_callback);
-        button.addEventListener("click", finishLevel.bind(null, e, level));
+        button.addEventListener("click", finishLevel.bind(null, e, level, run_level_callback));
     }
     /* We want to disable all events, so that users don't click when
     their guess is made */
@@ -72,10 +91,43 @@ function handleClick(e, ion_to_guess_name, run_level_callback, level) {
     }
 }
 
-function finishLevel(e, level) {
-    alert("Game finished! Show results page...");
+function finishLevel(e, level, run_level_callback) {
+    progress = 0;
+    var game = document.getElementById("game-container");
+    game.style.display = "none";
+    var results = document.getElementById("results-container");
+    results.style.display = "block";
+    Array.from(document.getElementsByClassName("firstIonSelected")).forEach(element => {
+        element.classList.remove("firstIonSelected");
+        element.classList.remove("wrong-guess");
+    });
+    Array.from(document.getElementsByClassName("fa-solid fa-star")).forEach(element => {
+        element.classList.remove("star-wrong");
+        element.classList.remove("star-correct");
+    })
+    var button = document.getElementById("next-button");
+    button.style.visibility = "hidden";
+    button.innerHTML = "Próximo";
+    elClone = button.cloneNode(true);
+    button.parentNode.replaceChild(elClone, button);
+    elClone.addEventListener("click", run_level_callback);
 }
 
+function closeResults(){
+ var results = document.getElementById("results-container");
+ results.classList.add("close-results-card");
+ click_sound.play();
+ setTimeout(() => {
+    results.classList.remove("close-results-card");
+    results.style.display = "none";
+    document.getElementById("game-container").style.display = "block";
+    document.getElementById("level-selector").style.display = "flex";
+    document.getElementById("title").style.display = "flex";
+    document.getElementById("game").style.display = "none";
+
+}, 205)
+
+}
 async function startLevel(level) {
     if (level == 1) {
         await runLevel1();
@@ -155,6 +207,7 @@ function setupEvents(elements, correct_value, callback, level) {
         elClone.addEventListener('mouseenter', setSquareToSelected)
         elClone.addEventListener('mouseleave', setSquareToUnselected);
         elClone.addEventListener('click', e => handleClick(e, correct_value, callback, level));
+
     }
 }
 
