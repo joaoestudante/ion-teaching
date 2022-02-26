@@ -94,6 +94,7 @@ async function startLevel(level) {
 }
 
 async function runLevel2() {
+    setTimeout(() => click_sound.play(), 100);
     clearColors();
     hideExtraElements();
     selected_ions = await getRandomIons(3, 2);
