@@ -1,5 +1,5 @@
 var progress = 0;
-var max_guess = 1;
+var max_guess = 5;
 var correct_sound = new Howl({
     src:["../../sfx/correct.wav"],
     volume: 0
@@ -64,13 +64,16 @@ function handleClick(e, ion_to_guess_name, run_level_callback, level) {
         document.getElementsByClassName("fa-solid fa-star")[progress].classList.add("star-correct");
         e.target.classList.add("correct-guess");
         setTimeout(() => correct_sound.play(), 150);
+        answers.push(
+            {"correct":ion_to_guess_name,"correct_symbol":document.getElementById("ion-top1").innerHTML , "chosen":e.target.innerHTML}
+        )
     } else {
         e.target.removeEventListener('mouseleave', setSquareToUnselected);
         document.getElementsByClassName("fa-solid fa-star")[progress].classList.add("star-wrong");
         e.target.classList.add("wrong-guess");
         setTimeout(() => wrong_sound.play(), 150);
         answers.push(
-            {"correct":ion_to_guess_name, "chosen":e.target.innerHTML}
+            {"correct":ion_to_guess_name, "correct_symbol":document.getElementById("ion-top1").innerHTML, "chosen":e.target.innerHTML}
         )
     }
     var button = document.getElementById("next-button");
@@ -105,13 +108,81 @@ function finishLevel(e, level, run_level_callback) {
         element.classList.remove("star-wrong");
         element.classList.remove("star-correct");
     })
+    
     var button = document.getElementById("next-button");
     button.style.visibility = "hidden";
     button.innerHTML = "Próximo";
     elClone = button.cloneNode(true);
     button.parentNode.replaceChild(elClone, button);
     elClone.addEventListener("click", run_level_callback);
+
+    var results_text = document.getElementById("results-content")
+    correct_answers = "Certas: "
+    results_text.innerHTML += correct_answers.bold();
+    
+    var counter = 0;
+    for (i in answers){
+        if (answers[i]["chosen"] == answers[i]["correct"]){
+            var p = document.createElement("p");
+            p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"];
+            results_text.appendChild(p);
+        } else {
+            counter++;
+        }
+        
+    }
+    
+    if (counter == max_guess){
+        results_text.innerHTML += "Não acertaste nenhuma!"
+    }
+    
+    var p = document.createElement("p");
+    wrong_answers = "Erradas:";
+    p.innerHTML = wrong_answers.bold();
+    results_text.appendChild(p);
+
+    for (i in answers){
+        if (answers[i]["chosen"] != answers[i]["correct"]){
+            var p = document.createElement("p");
+            p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"] + " e o correto é " + answers[i]["correct"];
+            results_text.appendChild(p);
+        }
+    }
+    //showResults(level);
+    answers.length = 0;
 }
+
+/* function showResults(level){
+    switch(level){
+        case(1):
+        for (i in answers){
+            if (answers[i]["chosen"] == answers[i]["correct"]){
+                var p = document.createElement("p");
+                p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"];
+                results_text.appendChild(p);
+            } else {
+                var counter =+ 1;
+            }
+            
+        }
+        if (counter == max_guess){
+            results_text.innerHTML += "Não acertaste nenhuma!"
+        }
+        
+        var p = document.createElement("p");
+        p.innerHTML = "Erradas:";
+        results_text.appendChild(p);
+    
+        for (i in answers){
+            if (answers[i]["chosen"] != answers[i]["correct"]){
+                var p = document.createElement("p");
+                p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"] + " e o correto é " + answers[i]["correct"];
+                results_text.appendChild(p);
+            }
+        }
+        break;
+    }
+} */
 
 function closeResults(){
  var results = document.getElementById("results-container");
@@ -125,9 +196,9 @@ function closeResults(){
     document.getElementById("title").style.display = "flex";
     document.getElementById("game").style.display = "none";
 
-}, 205)
-
+    }, 205)
 }
+
 async function startLevel(level) {
     if (level == 1) {
         await runLevel1();
