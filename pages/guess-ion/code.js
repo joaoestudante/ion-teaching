@@ -116,73 +116,54 @@ function finishLevel(e, level, run_level_callback) {
     button.parentNode.replaceChild(elClone, button);
     elClone.addEventListener("click", run_level_callback);
 
-    var results_text = document.getElementById("results-content")
-    correct_answers = "Certas: "
-    results_text.innerHTML += correct_answers.bold();
-    
-    var counter = 0;
-    for (i in answers){
-        if (answers[i]["chosen"] == answers[i]["correct"]){
-            var p = document.createElement("p");
-            p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"];
-            results_text.appendChild(p);
-        } else {
-            counter++;
-        }
-        
-    }
-    
-    if (counter == max_guess){
-        results_text.innerHTML += "Não acertaste nenhuma!"
-    }
-    
-    var p = document.createElement("p");
-    wrong_answers = "Erradas:";
-    p.innerHTML = wrong_answers.bold();
-    results_text.appendChild(p);
-
-    for (i in answers){
-        if (answers[i]["chosen"] != answers[i]["correct"]){
-            var p = document.createElement("p");
-            p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"] + " e o correto é " + answers[i]["correct"];
-            results_text.appendChild(p);
-        }
-    }
-    //showResults(level);
+    showResults(level);
     answers.length = 0;
+    
 }
 
-/* function showResults(level){
+function showResults(level){
+    var results_text = document.getElementById("results-text")
+    results_text.innerHTML = "";
+    correct_answers = "Certas: "
+    results_text.innerHTML += correct_answers.bold();
     switch(level){
         case(1):
-        for (i in answers){
-            if (answers[i]["chosen"] == answers[i]["correct"]){
-                var p = document.createElement("p");
-                p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"];
-                results_text.appendChild(p);
-            } else {
-                var counter =+ 1;
+        case(2):
+            var counter = 0;
+            for (i in answers){
+                if (answers[i]["chosen"] == answers[i]["correct"]){
+                    var p = document.createElement("p");
+                    p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"];
+                    results_text.appendChild(p);
+                } else {
+                    counter++;
+                }
+                
             }
             
-        }
-        if (counter == max_guess){
-            results_text.innerHTML += "Não acertaste nenhuma!"
-        }
-        
-        var p = document.createElement("p");
-        p.innerHTML = "Erradas:";
-        results_text.appendChild(p);
-    
-        for (i in answers){
-            if (answers[i]["chosen"] != answers[i]["correct"]){
-                var p = document.createElement("p");
-                p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"] + " e o correto é " + answers[i]["correct"];
-                results_text.appendChild(p);
+            if (counter == max_guess){
+                results_text.innerHTML += "Não acertaste nenhuma!"
             }
-        }
-        break;
+            
+            var p = document.createElement("p");
+            wrong_answers = "Erradas:";
+            p.innerHTML = wrong_answers.bold();
+            results_text.appendChild(p);
+
+            if (counter == 0){
+                results_text.innerHTML += "Parabéns, acertaste todos!"
+            }
+            
+            for (i in answers){
+                if (answers[i]["chosen"] != answers[i]["correct"]){
+                    var p = document.createElement("p");
+                    p.innerHTML = answers[i]["correct_symbol"] + ": Escolheste " + answers[i]["chosen"] + " e o correto é " + answers[i]["correct"];
+                    results_text.appendChild(p);
+                }
+            }
+            break;
     }
-} */
+}
 
 function closeResults(){
  var results = document.getElementById("results-container");
